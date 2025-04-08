@@ -22,7 +22,6 @@ From source:
 
 ```
 pip install -r requirements.txt
-
 ```
 
 ## Train the Agent
