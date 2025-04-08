@@ -78,6 +78,29 @@ Where:
 ```bash
 python enjoy_sbx.py --algo crossq --env footsteps-planning-right-v0 --gym-packages gym_footsteps_planning --folder logs/ --load-best --exp-id 0
 ```
+## Converting model format
+
+### PTH -> ONNX
+
+The converter is in the PTH_Converter folder. You need to change the correct directory of your model. It must be a zip file.
+
+### ONNX -> OpenVino
+
+*OpenVino library is required*
+
+```bash
+python enjoy_sbx.py --algo crossq --env footsteps-planning-right-v0 --gym-packages gym_footsteps_planning --folder logs/ --load-best --exp-id 0
+```
+
+To convert the model:
+
+```bash
+mo --input_model model.onnx
+```
+
+It will create 2 files: 
+- model.xml (model structure)
+- model.bin (model weight)
 
 ## Environments
 
