@@ -1,5 +1,3 @@
-[![codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
 # FootStepNet Envs : Footsteps Planning RL Environments for Fast On-line Bipedal Footstep Planning and Forecasting
 
 <img src="https://github.com/user-attachments/assets/056cf809-544b-4a97-b35f-bb06a846bae7" align="right" width="50%"/>
@@ -23,19 +21,8 @@ Consult the associated article for more information : [FootstepNet: an Efficient
 From source:
 
 ```
-pip install -e .
-```
+pip install -r requirements.txt
 
-To train and enjoy using Stable Baselines3 (SB3), install RL Baselines3 Zoo:
-
-```
-pip install rl_zoo3
-```
-
-To train and enjoy using Stable Baselines Jax (SBX):
-
-```
-pip install sbx-rl
 ```
 
 ## Train the Agent
@@ -50,11 +37,7 @@ For now, the best DRL algorithm for this environment is TD3.
 You can train an agent using:
 
 ```bash
-python -m rl_zoo3.train \
-    --algo td3 \
-    --env footsteps-planning-right-v0 \
-    --gym-packages gym_footsteps_planning \
-    --conf hyperparams/td3.yml
+python -m rl_zoo3.train --algo td3 --env footsteps-planning-right-v0 --gym-packages gym_footsteps_planning --conf hyperparams/td3.yml
 ```
 
 Where:
@@ -69,10 +52,7 @@ The trained agent will be stored in the `.\logs\[algo-name]\[env-name]_[exp-id]`
 ### Using Stable Baselines Jax (SBX)
 
 ```bash
-python train_sbx.py \
-    --algo crossq \
-    --env footsteps-planning-right-v0 \
-    --conf hyperparams/crossq.yml
+python train_sbx.py --algo crossq --env footsteps-planning-right-v0 --conf hyperparams/crossq.yml
 ```
 
 ## Enjoy a Trained Agent
@@ -82,13 +62,7 @@ python train_sbx.py \
 If a trained agent exists, you can see it in action using:
 
 ```bash
-python -m rl_zoo3.enjoy \
-    --algo td3 \
-    --env footsteps-planning-right-v0 \
-    --gym-packages gym_footsteps_planning \
-    --folder logs/ \
-    --load-best \
-    --exp-id 0
+python -m rl_zoo3.enjoy --algo td3 --env footsteps-planning-right-v0 --gym-packages gym_footsteps_planning --folder logs/ --load-best \--exp-id 0
 ```
 
 Where:
@@ -103,13 +77,7 @@ Where:
 ### Using Stable Baselines Jax (SBX)
 
 ```bash
-python enjoy_sbx.py \
-    --algo crossq \
-    --env footsteps-planning-right-v0 \
-    --gym-packages gym_footsteps_planning \
-    --folder logs/ \
-    --load-best \
-    --exp-id 0
+python enjoy_sbx.py --algo crossq --env footsteps-planning-right-v0 --gym-packages gym_footsteps_planning --folder logs/ --load-best --exp-id 0
 ```
 
 ## Environments
