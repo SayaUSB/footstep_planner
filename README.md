@@ -82,7 +82,7 @@ python enjoy_sbx.py --algo crossq --env footsteps-planning-right-v0 --gym-packag
 
 ### PTH -> ONNX
 
-The converter is in the PTH_Converter folder. You need to change the correct directory of your model. It must be a zip file.
+The converter is in the PTH_Converter folder. You need to change the correct directory of your model. It must be a zip file. It will create an onnx file
 
 ### ONNX -> OpenVino
 
