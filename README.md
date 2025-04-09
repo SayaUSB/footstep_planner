@@ -89,7 +89,7 @@ The converter is in the PTH_Converter folder. You need to change the correct dir
 *OpenVino library is required*
 
 ```bash
-python enjoy_sbx.py --algo crossq --env footsteps-planning-right-v0 --gym-packages gym_footsteps_planning --folder logs/ --load-best --exp-id 0
+pip install openvino-dev
 ```
 
 To convert the model:
