@@ -68,8 +68,10 @@ class FootstepPlanner:
                 break
         
             print(info["Foot Coord"], info["Support Foot"])
+            self.env.render()
 
 if __name__ == "__main__":
     ashioto = FootstepPlanner()
-    ashioto.goal_position = [5,5,0]
+    ashioto.current_position = list(map(np.float64, input("Current position (X, Y, Z)").split()))
+    ashioto.goal_position = list(map(np.float64, input("Goal position (X, Y, Z):").split()))
     ashioto.main()
