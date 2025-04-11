@@ -61,7 +61,7 @@ python train_sbx.py --algo crossq --env footsteps-planning-right-v0 --conf hyper
 If a trained agent exists, you can see it in action using:
 
 ```bash
-python -m rl_zoo3.enjoy --algo td3 --env footsteps-planning-right-v0 --gym-packages gym_footsteps_planning --folder logs/ --load-best \--exp-id 0
+python -m rl_zoo3.enjoy --algo td3 --env footsteps-planning-right-v0 --gym-packages gym_footsteps_planning --folder logs/ --load-best --exp-id 0
 ```
 
 Where:
