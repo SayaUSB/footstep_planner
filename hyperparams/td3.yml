@@ -1,5 +1,5 @@
 footsteps-planning-v0: &footsteps-planning
-  n_timesteps: !!float 10e6
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   gamma: 0.98
   buffer_size: 200000
