@@ -37,6 +37,8 @@ class FootstepsPlanningEnv(gymnasium.Env):
             "shaped": True,
             # If True, the goal will be sampled in a 4x4m area, else it will be fixed at (0,0)
             "multi_goal": False,
+            "panjang": 8,  # [m]
+            "lebar": 6,  # [m]
         }
         self.options.update(options or {})
 
@@ -48,6 +50,8 @@ class FootstepsPlanningEnv(gymnasium.Env):
         self.simulator.feet_spacing = self.options["feet_spacing"]
         self.simulator.foot_length = self.options["foot_length"]
         self.simulator.foot_width = self.options["foot_width"]
+        self.panjang = self.options["panjang"]
+        self.lebar = self.options["lebar"]
 
         # Maximum speed in each dimension
         self.min_step = np.array(
