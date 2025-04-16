@@ -30,9 +30,9 @@ class FootstepsPlanningEnv(gymnasium.Env):
             # Which foot is targeted (any, left or right)
             "foot": "any",
             # Foot geometry
-            "foot_length": 0.18,  # [m]
-            "foot_width": 0.095,  # [m]
-            "feet_spacing": 0.09,  # [m]
+            "foot_length": 0.16,  # [m]
+            "foot_width": 0.08,  # [m]
+            "feet_spacing": 0.1,  # [m]
             # Add reward shaping term
             "shaped": True,
             # If True, the goal will be sampled in a 4x4m area, else it will be fixed at (0,0)
