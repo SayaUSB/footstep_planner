@@ -46,6 +46,20 @@ Where:
 - `--gym-packages gym_footsteps_planning` is used to register the environment.
 - `--conf ./hyperparams/td3.yml` is the hyperparameters file to use.
 
+You can also continue training an agent using previous trained zip file
+
+```bash
+python -m rl_zoo3.train --algo td3 --env footsteps-planning-right-v0 --gym-packages gym_footsteps_planning --conf hyperparams/td3.yml --log-folder logs --trained-agent logs/td3/footsteps-planning-right-v0_1/best_model.zip
+```
+Where:
+
+- `--algo td3` is the RL algorithm to use (TD3 in this case).
+- `--env footsteps-planning-right-v0` is the environment to train on (see **Environments** section).
+- `--gym-packages gym_footsteps_planning` is used to register the environment.
+- `--conf ./hyperparams/td3.yml` is the hyperparameters file to use.
+- `--log-folder logs` is the directory where the model is saved
+- `--trained-agent` is the directory where the last checkpoint of the model is saved
+
 The trained agent will be stored in the `.\logs\[algo-name]\[env-name]_[exp-id]` folder from the current working directory.
 
 ### Using Stable Baselines Jax (SBX)
