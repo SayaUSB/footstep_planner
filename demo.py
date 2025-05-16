@@ -45,9 +45,9 @@ class FootstepPlanner:
 
     def envInitialize(self):
         """Initialize Environment"""
-        self.env = initialize(options=self.options)
+        self.env = initialize()
         self.env = TimeLimit(self.env, max_episode_steps=1000)
-        self.obs, _ = self.env.reset()
+        self.obs, _ = self.env.reset(options=self.options)
 
     def main(self):
         obs = self.obs

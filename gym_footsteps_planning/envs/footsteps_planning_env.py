@@ -30,15 +30,17 @@ class FootstepsPlanningEnv(gymnasium.Env):
             # Which foot is targeted (any, left or right)
             "foot": "any",
             # Foot geometry
-            "foot_length": 0.16,  # [m]
+            "foot_length": 0.14,  # [m]
             "foot_width": 0.08,  # [m]
-            "feet_spacing": 0.1,  # [m]
+            "feet_spacing": 0.15,  # [m]
             # Add reward shaping term
             "shaped": True,
             # If True, the goal will be sampled in a 4x4m area, else it will be fixed at (0,0)
             "multi_goal": False,
-            "panjang": 8,  # [m]
-            "lebar": 6,  # [m]
+            "start_support_foot": np.array([0,0,0], dtype=np.float32),
+            "target_support_foot": np.array([8,6,0], dtype=np.float32),
+            "panjang": 8, # [m]
+            "lebar": 6, # [m]
         }
         self.options.update(options or {})
 
