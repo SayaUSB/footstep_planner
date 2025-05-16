@@ -8,7 +8,7 @@ class FootstepPlanner:
     def __init__(self):
         # Initialize OpenVINO model
         self.core = Core()
-        self.model = self.core.read_model() # Give the right directory for the model
+        self.model = self.core.read_model("OpenVino_Model/any_obstacle_v1.xml") # Give the right directory for the model
         self.compiled_model = self.core.compile_model(self.model, "CPU")
         self.input_layer = self.compiled_model.input(0)
         self.output_layer = self.compiled_model.output(0)
@@ -19,7 +19,8 @@ class FootstepPlanner:
         # Robot Goal Position
         self.goal_position = [0, 0, 0]
 
-        # Options for the planner
+    def envInitialize(self):
+        """Initialize Environment"""
         self.options = {
             # Maximum steps
             "max_dx_forward": 0.08,  # [m]
@@ -33,7 +34,7 @@ class FootstepPlanner:
             "has_obstacle": False,
             "obstacle_max_radius": 0.25,  # [m]
             "obstacle_radius": None,  # [m]
-            "obstacle_position": np.array([0, 0], dtype=np.float64),  # [m,m]
+            "obstacle_position": np.array([0, 0], dtype=np.float32),  # [m,m]
             # Which foot is targeted (any, left or right)
             "foot": "any",
             # Foot geometry
@@ -44,13 +45,11 @@ class FootstepPlanner:
             "shaped": True,
             # If True, the goal will be sampled in a 4x4m area, else it will be fixed at (0,0)
             "multi_goal": False,
-            "start_foot_pose": np.array(self.current_position, dtype=np.float64),
-            "target_foot_pose": np.array(self.goal_position, dtype=np.float64),
+            "start_foot_pose": np.array(self.current_position, dtype=np.float32),
+            "target_foot_pose": np.array(self.goal_position, dtype=np.float32),
             "panjang": 8, # [m]
             "lebar": 6, # [m]
         }
-
-        # Initialize Environment
         self.env = initialize(options=self.options)
         self.env = TimeLimit(self.env, max_episode_steps=1000)
         self.obs, _ = self.env.reset()
@@ -72,6 +71,7 @@ class FootstepPlanner:
 
 if __name__ == "__main__":
     ashioto = FootstepPlanner()
-    ashioto.current_position = list(map(np.float64, input("Current position (X, Y, Z)").split()))
-    ashioto.goal_position = list(map(np.float64, input("Goal position (X, Y, Z):").split()))
+    ashioto.current_position = list(map(np.float64, input("Current position (X, Y, Z): ").split()))
+    ashioto.goal_position = list(map(np.float64, input("Goal position (X, Y, Z): ").split()))
+    ashioto.envInitialize()
     ashioto.main()
