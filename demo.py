@@ -13,14 +13,6 @@ class FootstepPlanner:
         self.input_layer = self.compiled_model.input(0)
         self.output_layer = self.compiled_model.output(0)
 
-        # Robot Current Position
-        self.current_position = [0, 0, 0]
-
-        # Robot Goal Position
-        self.goal_position = [0, 0, 0]
-
-    def envInitialize(self):
-        """Initialize Environment"""
         self.options = {
             # Maximum steps
             "max_dx_forward": 0.08,  # [m]
@@ -45,11 +37,14 @@ class FootstepPlanner:
             "shaped": True,
             # If True, the goal will be sampled in a 4x4m area, else it will be fixed at (0,0)
             "multi_goal": False,
-            "start_foot_pose": np.array(self.current_position, dtype=np.float32),
-            "target_foot_pose": np.array(self.goal_position, dtype=np.float32),
+            "start_foot_pose": np.array([0,0,0], dtype=np.float32),
+            "target_foot_pose": np.array([8,6,0], dtype=np.float32),
             "panjang": 8, # [m]
             "lebar": 6, # [m]
         }
+
+    def envInitialize(self):
+        """Initialize Environment"""
         self.env = initialize(options=self.options)
         self.env = TimeLimit(self.env, max_episode_steps=1000)
         self.obs, _ = self.env.reset()
@@ -57,7 +52,7 @@ class FootstepPlanner:
     def main(self):
         obs = self.obs
         while True:
-            obs_input = np.expand_dims(obs, axis=0).astype(np.float64)
+            obs_input = np.expand_dims(obs, axis=0).astype(np.float32)
             result = self.compiled_model([obs_input])[self.output_layer]
             action = np.squeeze(result, axis=0)
             obs, _, terminated, _, info = self.env.step(action)
@@ -71,7 +66,7 @@ class FootstepPlanner:
 
 if __name__ == "__main__":
     ashioto = FootstepPlanner()
-    ashioto.current_position = list(map(np.float64, input("Current position (X, Y, Z): ").split()))
-    ashioto.goal_position = list(map(np.float64, input("Goal position (X, Y, Z): ").split()))
+    ashioto.options["start_foot_pose"] = list(map(np.float32, input("Current position (X, Y, Z): ").split()))
+    ashioto.options["target_foot_pose"] = list(map(np.float32, input("Goal position (X, Y, Z): ").split()))
     ashioto.envInitialize()
     ashioto.main()
